@@ -64,6 +64,7 @@ export default function AdminPortal() {
     category: "",
     price: "",
     description: "",
+    image_url: "",
   });
   const [prodImage, setProdImage] = useState<File | null>(null);
   const [imagePreview, setImagePreview] = useState<string | null>(null);
@@ -152,6 +153,7 @@ export default function AdminPortal() {
       formData.append("category", newProd.category);
       if (newProd.price) formData.append("price", newProd.price);
       formData.append("description", newProd.description);
+      if (newProd.image_url) formData.append("image_url", newProd.image_url);
       if (prodImage) {
         formData.append("image", prodImage);
       }
@@ -164,7 +166,7 @@ export default function AdminPortal() {
       if (!res.ok) throw new Error("Failed to add product.");
 
       setProdMessage("Product added successfully!");
-      setNewProd({ name: "", category: "", price: "", description: "" });
+      setNewProd({ name: "", category: "", price: "", description: "", image_url: "" });
       setProdImage(null);
       setImagePreview(null);
       fetchProducts();
@@ -443,6 +445,17 @@ export default function AdminPortal() {
                           onChange={(e) => setNewProd({ ...newProd, description: e.target.value })}
                         />
                       </div>
+
+                      <div className="form-group">
+                        <label className="form-label">Product Image URL (Alternative to file upload)</label>
+                        <input
+                          type="text"
+                          className="form-input"
+                          placeholder="e.g. https://i.postimg.cc/image.png"
+                          value={newProd.image_url}
+                          onChange={(e) => setNewProd({ ...newProd, image_url: e.target.value })}
+                        />
+                      </div>
                     </div>
 
                     <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
@@ -506,7 +519,7 @@ export default function AdminPortal() {
                             <tr key={p.id}>
                               <td>
                                 {p.image_url ? (
-                                  <img src={`${API_BASE}${p.image_url}`} alt={p.name} className={styles.thumb} />
+                                  <img src={p.image_url.startsWith("http") ? p.image_url : `${API_BASE}${p.image_url}`} alt={p.name} className={styles.thumb} />
                                 ) : (
                                   <div className={styles.thumb} style={{ display: "flex", alignItems: "center", justifyContent: "center", fontSize: "0.75rem", color: "var(--text-muted)", fontWeight: "500", textAlign: "center" }}>
                                     No Image

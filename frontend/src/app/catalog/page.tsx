@@ -150,7 +150,7 @@ export default function Catalog() {
                 <div className={styles.imgContainer}>
                   {product.image_url ? (
                     <img
-                      src={`${API_BASE}${product.image_url}`}
+                      src={product.image_url.startsWith("http") ? product.image_url : `${API_BASE}${product.image_url}`}
                       alt={product.name}
                       className={styles.productImg}
                     />

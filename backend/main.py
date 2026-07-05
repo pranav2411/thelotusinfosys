@@ -124,10 +124,14 @@ async def create_product(
     price: Optional[float] = Form(None),
     category: Optional[str] = Form(None),
     image: Optional[UploadFile] = File(None),
+    image_url: Optional[str] = Form(None),
     db: Session = Depends(get_db)
 ):
-    image_url = None
-    if image:
+    final_image_url = None
+    
+    if image_url and image_url.strip():
+        final_image_url = image_url.strip()
+    elif image:
         # Save temporary file
         temp_filename = f"temp_{random.randint(1000, 9999)}_{image.filename}"
         temp_path = os.path.join(UPLOAD_DIR, temp_filename)
@@ -138,7 +142,7 @@ async def create_product(
         # Save processed image (placeholder for background removal)
         final_filename = f"prod_{int(datetime.utcnow().timestamp())}_{image.filename}"
         try:
-            image_url = process_product_image(temp_path, final_filename)
+            final_image_url = process_product_image(temp_path, final_filename)
         finally:
             # Clean up temp file
             if os.path.exists(temp_path):
@@ -149,7 +153,7 @@ async def create_product(
         description=description,
         price=price,
         category=category,
-        image_url=image_url
+        image_url=final_image_url
     )
     db.add(new_product)
     db.commit()
