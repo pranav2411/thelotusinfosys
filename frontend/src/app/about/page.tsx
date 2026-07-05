@@ -69,12 +69,12 @@ export default function About() {
                   <span className={styles.detailValue}>2000</span>
                 </li>
                 <li className={styles.detailItem}>
-                  <span className={styles.detailLabel}>Headquarters</span>
+                  <span className={styles.detailLabel}>At-</span>
                   <span className={styles.detailValue}>Bani Park, Jaipur</span>
                 </li>
                 <li className={styles.detailItem}>
                   <span className={styles.detailLabel}>Founder/Owner</span>
-                  <span className={styles.detailValue}>Pranav Khandelwal</span>
+                  <span className={styles.detailValue}>Kamal Khandelwal</span>
                 </li>
               </ul>
             </div>
