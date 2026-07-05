@@ -1,0 +1,256 @@
+.searchCard {
+  max-width: 600px;
+  margin: 0 auto 40px;
+  background: white;
+  padding: 40px;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow-md);
+  text-align: center;
+}
+
+.searchTitle {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--primary);
+  margin-bottom: 8px;
+}
+
+.searchDesc {
+  color: var(--text-secondary);
+  font-size: 0.95rem;
+  margin-bottom: 24px;
+}
+
+.searchForm {
+  display: flex;
+  gap: 12px;
+}
+
+.input {
+  flex-grow: 1;
+  padding: 12px 18px;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border);
+  font-size: 1.1rem;
+  text-align: center;
+  text-transform: uppercase;
+  font-weight: 600;
+  letter-spacing: 1px;
+  outline: none;
+}
+
+.input:focus {
+  border-color: var(--border-focus);
+  box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.1);
+}
+
+@media (max-width: 480px) {
+  .searchForm {
+    flex-direction: column;
+  }
+}
+
+/* Tracking Result Layout */
+.resultCard {
+  max-width: 800px;
+  margin: 0 auto;
+  background: white;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow-lg);
+  overflow: hidden;
+  animation: slideUp 0.4s ease;
+}
+
+.header {
+  background: linear-gradient(135deg, var(--primary), var(--accent));
+  color: white;
+  padding: 30px 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.headerInfo h2 {
+  font-size: 1.6rem;
+  font-weight: 800;
+  letter-spacing: 0.5px;
+}
+
+.headerInfo p {
+  opacity: 0.85;
+  font-size: 0.9rem;
+  margin-top: 4px;
+}
+
+.statusBadge {
+  background: white;
+  color: var(--primary);
+  padding: 8px 20px;
+  border-radius: var(--radius-full);
+  font-weight: 700;
+  font-size: 0.95rem;
+  box-shadow: var(--shadow-sm);
+}
+
+.body {
+  padding: 40px;
+}
+
+/* Step tracker styling */
+.tracker {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 50px;
+  position: relative;
+  width: 100%;
+}
+
+.tracker::before {
+  content: '';
+  position: absolute;
+  top: 15px;
+  left: 30px;
+  right: 30px;
+  height: 4px;
+  background-color: #e2e8f0;
+  z-index: 1;
+}
+
+.progressLine {
+  position: absolute;
+  top: 15px;
+  left: 30px;
+  height: 4px;
+  background-color: var(--success);
+  z-index: 2;
+  transition: width 0.4s ease;
+}
+
+.step {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  z-index: 3;
+  width: 80px;
+}
+
+.stepDot {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background-color: #e2e8f0;
+  border: 4px solid white;
+  box-shadow: 0 0 0 1px #cbd5e1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: #64748b;
+  transition: all 0.3s ease;
+}
+
+.activeStep .stepDot {
+  background-color: var(--primary);
+  box-shadow: 0 0 0 1px var(--primary);
+  color: white;
+}
+
+.completedStep .stepDot {
+  background-color: var(--success);
+  box-shadow: 0 0 0 1px var(--success);
+  color: white;
+}
+
+.stepLabel {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  text-align: center;
+  margin-top: 12px;
+}
+
+.activeStep .stepLabel {
+  color: var(--primary);
+  font-weight: 700;
+}
+
+.completedStep .stepLabel {
+  color: var(--success);
+}
+
+@media (max-width: 640px) {
+  .tracker {
+    flex-direction: column;
+    gap: 24px;
+    align-items: flex-start;
+    padding-left: 20px;
+  }
+  .tracker::before {
+    left: 35px;
+    top: 0;
+    bottom: 0;
+    width: 4px;
+    height: auto;
+  }
+  .progressLine {
+    left: 35px;
+    top: 0;
+    width: 4px;
+    height: 100%; /* JS will configure height dynamically in CSS module but for simplicity vertical steps work differently */
+  }
+  .step {
+    flex-direction: row;
+    width: 100%;
+    gap: 16px;
+  }
+  .stepLabel {
+    margin-top: 0;
+    text-align: left;
+  }
+}
+
+/* Device Info Grid */
+.infoGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 32px;
+  border-top: 1px solid var(--border);
+  padding-top: 32px;
+}
+
+.infoBlock h4 {
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  letter-spacing: 0.5px;
+  margin-bottom: 6px;
+}
+
+.infoBlock p {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.issueBlock {
+  grid-column: span 2;
+  background-color: #f8fafc;
+  padding: 20px;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border);
+}
+
+@media (max-width: 640px) {
+  .infoGrid {
+    grid-template-columns: 1fr;
+  }
+  .issueBlock {
+    grid-column: span 1;
+  }
+}
