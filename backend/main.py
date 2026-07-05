@@ -26,11 +26,10 @@ class ServiceTokenCreate(BaseModel):
 
 app = FastAPI(title="The Lotus Infosys API", version="1.0.0")
 
-# Enable CORS for Next.js frontend development server
+# Enable CORS for Next.js frontend development and cloud deployments
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:3000", "http://127.0.0.1:3000"],
-    allow_credentials=True,
+    allow_origins=["*"],
     allow_methods=["*"],
     allow_headers=["*"],
 )
