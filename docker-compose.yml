@@ -1,0 +1,34 @@
+version: "3.8"
+
+services:
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: lotus_backend
+    restart: always
+    ports:
+      - "127.0.0.1:8000:8000"
+    volumes:
+      - ./backend/uploads:/app/uploads
+      # Persist the sqlite database file
+      - ./backend/lotus_infosys.db:/app/lotus_infosys.db
+    environment:
+      - DATABASE_URL=sqlite:///./lotus_infosys.db
+      # If you switch to Postgres, configure it here:
+      # - DATABASE_URL=postgresql://user:password@host:port/dbname
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+      args:
+        - NEXT_PUBLIC_API_URL=${NEXT_PUBLIC_API_URL}
+    container_name: lotus_frontend
+    restart: always
+    ports:
+      - "127.0.0.1:3000:3000"
+    depends_on:
+      - backend
+    environment:
+      - NODE_ENV=production
