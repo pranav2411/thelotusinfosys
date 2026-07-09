@@ -1,5 +1,3 @@
-version: "3.8"
-
 services:
   backend:
     build:
@@ -11,10 +9,9 @@ services:
       - "127.0.0.1:8000:8000"
     volumes:
       - ./backend/uploads:/app/uploads
-      # Persist the sqlite database file
-      - ./backend/lotus_infosys.db:/app/lotus_infosys.db
+      - ./backend/data:/app/data
     environment:
-      - DATABASE_URL=sqlite:///./lotus_infosys.db
+      - DATABASE_URL=sqlite:////app/data/lotus_infosys.db
       # If you switch to Postgres, configure it here:
       # - DATABASE_URL=postgresql://user:password@host:port/dbname
 

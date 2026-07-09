@@ -13,8 +13,8 @@ RUN pip install --no-cache-dir -r requirements.txt
 
 COPY . .
 
-# Ensure uploads directory exists
-RUN mkdir -p uploads
+# Ensure uploads and data directories exist
+RUN mkdir -p uploads data
 
 # Expose port 8000
 EXPOSE 8000
